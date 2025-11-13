@@ -108,11 +108,21 @@
         document.getElementsByClassName('leaflet-control-measure-toggle')[0].innerHTML = '';
         document.getElementsByClassName('leaflet-control-measure-toggle')[0].className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
+        const boundsData = {
+            _southWest: { lat: -55.5, lng: -74.5 },
+            _northEast: { lat: -21.664, lng: -53.0 }
+        };
+        const bounds = L.latLngBounds(
+            L.latLng(boundsData._southWest.lat, boundsData._southWest.lng),
+            L.latLng(boundsData._northEast.lat, boundsData._northEast.lng)
+        );
+
         function setBounds() {
             if (bounds_group.getLayers().length) {
-                map.fitBounds(bounds_group.getBounds());
+                map.fitBounds(bounds, {maxZoom:7});
             }
-            map.setMaxBounds(map.getBounds());
+            map.setMaxBounds(bounds);
+            console.log(map.getBounds())
             map.setMinZoom(map.getZoom());
         }
         map.createPane('pane_Argenmap_0');
@@ -124,7 +134,7 @@
             minZoom: 2,
             maxZoom: 7,
             minNativeZoom: 0,
-            maxNativeZoom: 18
+            maxNativeZoom: 7
         });
         layer_Argenmap_0;
         map.addLayer(layer_Argenmap_0);
@@ -201,8 +211,10 @@
                 return L.marker(latlng, style_Empresas_1_0(feature));
             },
         });
-        var cluster_Empresas_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-            spiderfyDistanceMultiplier: 2});
+        var cluster_Empresas_1 = new L.MarkerClusterGroup({
+            showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2,
+            maxClusterRadius: 62});
         cluster_Empresas_1.addLayer(layer_Empresas_1);
 
         bounds_group.addLayer(layer_Empresas_1);
