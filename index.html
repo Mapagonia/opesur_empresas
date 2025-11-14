@@ -196,10 +196,10 @@
         map.createPane('pane_Empresas_1');
         map.getPane('pane_Empresas_1').style.zIndex = 401;
         map.getPane('pane_Empresas_1').style['mix-blend-mode'] = 'normal';
-        var layer_Empresas_1 = new L.geoJson(json_Empresas_1, {
+        var layer_Empresas_1 = new L.geoJson(Empresas_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Empresas_1',
+            dataVar: 'Empresas_1',
             layerName: 'layer_Empresas_1',
             pane: 'pane_Empresas_1',
             onEachFeature: pop_Empresas_1,
