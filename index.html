@@ -60,7 +60,7 @@
             }
         }
         var map = L.map('map', {
-            zoomControl:false, maxZoom:7, minZoom:2
+            zoomControl:false, maxZoom:7, minZoom:2, zoom: 5, center: [-38.4,-63.6]
         })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
@@ -96,7 +96,6 @@
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
-        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'feet',
@@ -117,12 +116,8 @@
             L.latLng(boundsData._northEast.lat, boundsData._northEast.lng)
         );
 
-        function setBounds() {
-            if (bounds_group.getLayers().length) {
-                map.fitBounds(bounds);
-            }
-            map.setMaxBounds(bounds);
-            console.log(map.getBounds())
+        function setBounds() {        
+            map.setMaxBounds(bounds);        
             map.setMinZoom(map.getZoom());
         }
         map.createPane('pane_Argenmap_0');
